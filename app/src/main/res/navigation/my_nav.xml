@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/my_nav">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/articlesFragment">
 
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.afares.journaldev.ui.fragments.articles.ArticlesFragment"
+        android:label="fragment_articles"
+        tools:layout="@layout/fragment_articles" />
+    <fragment
+        android:id="@+id/articleDetailsFragment"
+        android:name="com.afares.journaldev.ui.fragments.articledetails.ArticleDetailsFragment"
+        android:label="fragment_article_details"
+        tools:layout="@layout/fragment_article_details" />
 </navigation>
