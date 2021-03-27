@@ -1,9 +1,10 @@
-package com.afares.journaldev
+package com.afares.journaldev.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.afares.journaldev.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
