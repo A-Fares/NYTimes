@@ -1,6 +1,6 @@
 package com.afares.journaldev.data.network
 
-import com.afares.journaldev.model.Article
+import com.afares.journaldev.model.ArticleResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -12,6 +12,6 @@ interface ArticleApi {
     suspend fun getArticles(
         @Path("period") period: String,
         @Query("api-key") apiKey: String
-    ): Response<Article>
+    ): Response<ArticleResponse>
 
 }

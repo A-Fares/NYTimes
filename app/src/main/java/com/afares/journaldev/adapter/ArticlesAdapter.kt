@@ -5,18 +5,18 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.afares.journaldev.databinding.ArticlesRowLayoutBinding
+import com.afares.journaldev.model.ArticleResponse
 import com.afares.journaldev.model.Article
-import com.afares.journaldev.model.Result
 
 class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.MyViewHolder>() {
 
-    var articles = emptyList<Result>()
+    var articles = emptyList<Article>()
 
     class MyViewHolder(private val binding: ArticlesRowLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(result: Result, imageUrl: String) {
-            binding.result = result
+        fun bind(article: Article, imageUrl: String) {
+            binding.article = article
             binding.imageUrl = imageUrl
             binding.executePendingBindings()
         }
@@ -36,24 +36,24 @@ class ArticlesAdapter : RecyclerView.Adapter<ArticlesAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val currentRecipe = articles[position]
+        val currentItem = articles[position]
         var imageUrl = ""
 
         if (articles[position].media.isNotEmpty() && articles[position].media[0].mediaMetadata.isNotEmpty()
         ) {
-            imageUrl = articles[position].media[0].mediaMetadata[0].url
+            imageUrl = articles[position].media[0].mediaMetadata[2].url
         }
-        holder.bind(currentRecipe, imageUrl)
+        holder.bind(currentItem, imageUrl)
     }
 
     override fun getItemCount(): Int {
         return articles.size
     }
 
-    fun setData(newData: Article) {
-        val articlesDiffUtil = ArticlesDiffUtil(articles, newData.results)
+    fun setData(newData: ArticleResponse) {
+        val articlesDiffUtil = ArticlesDiffUtil(articles, newData.articles)
         val diffUtilResult = DiffUtil.calculateDiff(articlesDiffUtil)
-        articles = newData.results
+        articles = newData.articles
         diffUtilResult.dispatchUpdatesTo(this)
     }
 

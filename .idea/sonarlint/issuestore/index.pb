@@ -44,8 +44,6 @@ S
 #app/src/main/res/font/courgette.xml,b\4\b4282ff7a1af848f680da6fc01354fbe2b191ad1
 V
 &app/src/main/res/values/font_certs.xml,8\7\8721b09acc6dcb831485a758e527a36efbbce1ff
-d
-4app/src/main/res/layout/fragment_article_details.xml,5\7\57ffaaa7ba351f65fec904724cb3284b2d28d909
 T
 $app/src/main/res/drawable/ic_sad.xml,f\7\f7dd961753f95050b0590889c367e58cf382d4bc
 [

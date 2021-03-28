@@ -8,11 +8,22 @@
     <fragment
         android:id="@+id/articlesFragment"
         android:name="com.afares.journaldev.ui.fragments.articles.ArticlesFragment"
-        android:label="fragment_articles"
-        tools:layout="@layout/fragment_articles" />
+        android:label="Articles"
+        tools:layout="@layout/fragment_articles" >
+        <action
+            android:id="@+id/action_articlesFragment_to_articleDetailsFragment"
+            app:destination="@id/articleDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/articleDetailsFragment"
         android:name="com.afares.journaldev.ui.fragments.articledetails.ArticleDetailsFragment"
-        android:label="fragment_article_details"
-        tools:layout="@layout/fragment_article_details" />
+        android:label="Article Details"
+        tools:layout="@layout/fragment_article_details" >
+        <argument
+            android:name="article"
+            app:argType="com.afares.journaldev.model.Article" />
+        <argument
+            android:name="imageUrl"
+            app:argType="string" />
+    </fragment>
 </navigation>

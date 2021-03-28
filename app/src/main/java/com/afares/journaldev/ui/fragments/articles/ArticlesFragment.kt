@@ -2,17 +2,15 @@ package com.afares.journaldev.ui.fragments.articles
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.afares.journaldev.R
 import com.afares.journaldev.adapter.ArticlesAdapter
 import com.afares.journaldev.databinding.FragmentArticlesBinding
-import com.afares.journaldev.model.MediaMetadata
 import com.afares.journaldev.util.NetworkResult
 import com.afares.journaldev.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,5 +68,4 @@ class ArticlesFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

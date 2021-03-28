@@ -8,7 +8,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.afares.journaldev.data.Repository
-import com.afares.journaldev.model.Article
+import com.afares.journaldev.model.ArticleResponse
 import com.afares.journaldev.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : AndroidViewModel(application) {
 
-    var articlesResponse: MutableLiveData<NetworkResult<Article>> = MutableLiveData()
+    var articlesResponse: MutableLiveData<NetworkResult<ArticleResponse>> = MutableLiveData()
 
     fun getArticles(period: String) = viewModelScope.launch {
         getArticlesSafeCall(period)
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(
     }
 
 
-    private fun handleFoodArticlesResponse(response: Response<Article>): NetworkResult<Article>? {
+    private fun handleFoodArticlesResponse(response: Response<ArticleResponse>): NetworkResult<ArticleResponse>? {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
@@ -50,7 +50,7 @@ class MainViewModel @Inject constructor(
             response.code() == 402 -> {
                 return NetworkResult.Error("API Key Limited.")
             }
-            response.body()!!.results.isNullOrEmpty() -> {
+            response.body()!!.articles.isNullOrEmpty() -> {
                 return NetworkResult.Error("Articles Not Found.")
             }
             response.isSuccessful -> {
