@@ -6,6 +6,10 @@
     <data>
 
         <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
             name="result"
             type="com.afares.journaldev.model.Result" />
     </data>
@@ -36,6 +40,7 @@
 
                 <ImageView
                     android:id="@+id/recipe_imageView"
+                     loadImageFromUrl="@{imageUrl}"
                     android:layout_width="120dp"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -69,9 +74,12 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
+                    android:layout_marginBottom="16dp"
                     android:ellipsize="end"
                     android:maxLines="2"
+                    android:text="@{result.byline}"
                     android:textColor="@color/darkGray"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/publishedDate"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/title_textView"
@@ -82,11 +90,11 @@
                     android:id="@+id/publishedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@{result.publishedDate}"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/title_textView"
                     tools:text="2021-03-25" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
