@@ -1,6 +1,7 @@
 package com.afares.journaldev.ui.fragments.articles
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,16 +26,19 @@ class ArticlesFragment : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private val mAdapter by lazy { ArticlesAdapter() }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
+        requestApiData()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentArticlesBinding.inflate(inflater, container, false)
-        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         setupRecyclerView()
-        requestApiData()
-
-
+        
         return binding.root
     }
 
@@ -44,6 +48,7 @@ class ArticlesFragment : Fragment() {
     }
 
     private fun requestApiData() {
+        Log.d("CallAPI", "Call Api")
         mainViewModel.getArticles("1")
         lifecycleScope.launchWhenStarted {
             mainViewModel.articlesResponse.collect { response ->

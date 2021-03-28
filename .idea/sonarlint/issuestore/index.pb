@@ -48,8 +48,6 @@ T
 $app/src/main/res/drawable/ic_sad.xml,f\7\f7dd961753f95050b0590889c367e58cf382d4bc
 [
 +app/src/main/res/values/preloaded_fonts.xml,1\a\1ac4bbe3e597dbb591474f97b69d35c8d7401efe
-S
-#app/src/main/res/values/strings.xml,d\2\d2281fbb3027de2722081a53408dd77628bf080e
 s
 Capp/src/main/java/com/afares/journaldev/adapter/ArticlesDiffUtil.kt,b\2\b2921b238dc4343fcbeedba2b61ab749a70f85ae
 n
