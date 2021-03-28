@@ -11,6 +11,8 @@ import com.afares.journaldev.data.Repository
 import com.afares.journaldev.model.ArticleResponse
 import com.afares.journaldev.util.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import retrofit2.Response
 import javax.inject.Inject
@@ -21,28 +23,29 @@ class MainViewModel @Inject constructor(
     private val repository: Repository
 ) : AndroidViewModel(application) {
 
-    var articlesResponse: MutableLiveData<NetworkResult<ArticleResponse>> = MutableLiveData()
+    private val _articlesResponse = MutableStateFlow<NetworkResult<ArticleResponse>>(NetworkResult.Loading())
+    val articlesResponse: StateFlow<NetworkResult<ArticleResponse>> = _articlesResponse
 
     fun getArticles(period: String) = viewModelScope.launch {
         getArticlesSafeCall(period)
     }
 
     private suspend fun getArticlesSafeCall(period: String) {
-        articlesResponse.value = NetworkResult.Loading()
+        _articlesResponse.value = NetworkResult.Loading()
         if (hasInternetConnection()) {
             try {
                 val response = repository.remote.getArticles(period)
-                articlesResponse.value = handleFoodArticlesResponse(response)
+                _articlesResponse.value = handleFoodArticlesResponse(response)
             } catch (e: Exception) {
-                articlesResponse.value = NetworkResult.Error("Articles Not Found.")
+                _articlesResponse.value = NetworkResult.Error("Articles Not Found.")
             }
         } else {
-            articlesResponse.value = NetworkResult.Error("No Internet Connection.")
+            _articlesResponse.value = NetworkResult.Error("No Internet Connection.")
         }
     }
 
 
-    private fun handleFoodArticlesResponse(response: Response<ArticleResponse>): NetworkResult<ArticleResponse>? {
+    private fun handleFoodArticlesResponse(response: Response<ArticleResponse>): NetworkResult<ArticleResponse> {
         when {
             response.message().toString().contains("timeout") -> {
                 return NetworkResult.Error("Timeout")
